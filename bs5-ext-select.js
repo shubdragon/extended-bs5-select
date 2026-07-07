@@ -1,4 +1,4 @@
-window.NCS = window.NCS || {};
+ window.NCS = window.NCS || {};
 
   NCS.createSelect = function (mountEl, options) {
     var items = options.items || [];
@@ -147,6 +147,7 @@ window.NCS = window.NCS || {};
       disable: function () { wrapper.classList.add("ncs-disabled"); },
       enable: function () { wrapper.classList.remove("ncs-disabled"); }
     };
+    mountEl._ncsInstance = api;
     return api;
   };
 
@@ -175,4 +176,9 @@ window.NCS = window.NCS || {};
     });
 
     return instances;
+  };
+
+  NCS.getInstance = function (target) {
+    var el = typeof target === "string" ? document.querySelector(target) : target;
+    return (el && el._ncsInstance) || null;
   };
