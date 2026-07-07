@@ -11,6 +11,7 @@
     var selected = null;
     var highlightedIndex = -1;
     var filtered = items.slice();
+    var api; // populated at the end of this function; referenced by selectItem()
 
     var wrapper = document.createElement("div");
     wrapper.className = "ncs-select-wrapper";
@@ -73,7 +74,7 @@
       valueEl.classList.remove("ncs-placeholder");
       close();
       renderOptions();
-      onChange(item);
+      onChange(item, { el: mountEl, wrapper: wrapper, instance: api });
     }
 
     function open() {
@@ -141,7 +142,7 @@
 
     renderOptions();
 
-    return {
+    api = {
       getValue: function () { return selected; },
       setValue: function (value) {
         var found = items.find(function (i) { return i.value === value; });
@@ -150,7 +151,46 @@
       disable: function () { wrapper.classList.add("ncs-disabled"); },
       enable: function () { wrapper.classList.remove("ncs-disabled"); }
     };
+    return api;
   };
 
-   
+  /* ---------- Multi-mount helper ----------
+     Accepts: a CSS selector string, a jQuery collection,
+     a NodeList, an array of elements, or a single element.
+     Mounts one independent NCS instance per element and
+     returns an array of instances (same order as matched).
+
+     Usage:
+       NCS.createSelectAll('.icon-select', { items: countries, ... });
+       NCS.createSelectAll($('.icon-select'), { items: countries, ... });
+  */
+  NCS.createSelectAll = function (target, options) {
+    var els;
+
+    if (typeof target === "string") {
+      els = document.querySelectorAll(target);
+    } else if (target && typeof target.jquery === "string") {
+      // jQuery object -> plain array of DOM elements
+      els = target.toArray();
+    } else if (target instanceof NodeList || Array.isArray(target)) {
+      els = target;
+    } else if (target instanceof HTMLElement) {
+      els = [target];
+    } else {
+      els = [];
+    }
+
+    var instances = [];
+    els.forEach(function (el) {
+      // Guard: skip null/undefined entries or elements no longer in the DOM
+      // (can happen with Alpine x-if/x-for timing, or stale references)
+      if (!el || !(el instanceof HTMLElement) || !el.isConnected) return;
+      // Avoid double-mounting if called twice on the same element
+      if (el.dataset.ncsMounted === "1") return;
+      el.dataset.ncsMounted = "1";
+      instances.push(NCS.createSelect(el, options));
+    });
+
+    return instances;
+  };
 })();
