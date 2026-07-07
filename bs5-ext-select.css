@@ -88,7 +88,8 @@
     transition: opacity .12s ease, transform .12s ease;
   }
 
-  .ncs-select-wrapper.ncs-open .ncs-panel {
+  .ncs-select-wrapper.ncs-open .ncs-panel,
+  .ncs-panel.ncs-open {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -182,4 +183,38 @@
     background: #f3f4f6;
     color: var(--ncs-muted);
     cursor: not-allowed;
+  }
+
+  /*
+    ========================================================
+    BOOTSTRAP MODAL FIX (CSS-only)
+    ========================================================
+    Bootstrap clips overflowing content inside .modal-content /
+    .modal-body via `overflow: hidden` (for rounded corners) or
+    `overflow-y: auto` (on scrollable modal bodies). That clipping
+    happens regardless of z-index, so the dropdown panel gets cut
+    off even though it's positioned correctly.
+
+    Fix: temporarily switch those ancestors to `overflow: visible`
+    ONLY while a .ncs-panel is actually open inside them, using
+    :has(). This means normal modal scrolling still works the rest
+    of the time — it only opens up while your dropdown is showing.
+
+    Browser support: Chrome/Edge 105+, Safari 15.4+, Firefox 121+.
+    If you must support older browsers, remove this block and use
+    the JS "portal to <body>" approach instead (recommended anyway
+    for very tall option lists or modals with long scrollable
+    bodies, since it has no browser-support caveat).
+  */
+  .modal:has(.ncs-panel.ncs-open),
+  .modal-dialog:has(.ncs-panel.ncs-open),
+  .modal-content:has(.ncs-panel.ncs-open),
+  .modal-body:has(.ncs-panel.ncs-open) {
+    overflow: visible !important;
+  }
+
+  /* Make sure the panel always wins the stacking fight against the
+     modal backdrop (Bootstrap 5 backdrop is z-index 1055, modal 1056). */
+  .modal .ncs-panel {
+    z-index: 2147483000;
   }
