@@ -152,30 +152,5 @@
     };
   };
 
-  /* ---------- Demo wiring ---------- */
-  var countries = [
-    { value: "in", label: "India" },
-    { value: "us", label: "United States" },
-    { value: "de", label: "Germany" },
-    { value: "fr", label: "France" },
-    { value: "jp", label: "Japan" },
-    { value: "br", label: "Brazil" },
-    { value: "ca", label: "Canada" },
-    { value: "au", label: "Australia" },
-    { value: "gb", label: "United Kingdom" },
-    { value: "za", label: "South Africa" },
-    { value: "ng", label: "Nigeria" },
-    { value: "mx", label: "Mexico" },
-    { value: "kr", label: "South Korea" },
-    { value: "it", label: "Italy" },
-    { value: "es", label: "Spain" }
-  ];
-
-  NCS.createSelect(document.getElementById("country-select"), {
-    items: countries,
-    placeholder: "Select a country",
-    onChange: function (item) {
-      document.getElementById("selected-output").textContent = item.label + " (" + item.value + ")";
-    }
-  });
+   
 })();
