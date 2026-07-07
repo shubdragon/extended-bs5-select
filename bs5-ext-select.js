@@ -1,17 +1,13 @@
-(function () {
-  "use strict";
-
-  /* ---------- Reusable factory: window.NCS.createSelect ---------- */
-  window.NCS = window.NCS || {};
+window.NCS = window.NCS || {};
 
   NCS.createSelect = function (mountEl, options) {
-    var items = options.items || [];               // [{value, label}]
+    var items = options.items || [];
     var placeholder = options.placeholder || "Select an option";
     var onChange = options.onChange || function () {};
     var selected = null;
     var highlightedIndex = -1;
     var filtered = items.slice();
-    var api; // populated at the end of this function; referenced by selectItem()
+    var api;
 
     var wrapper = document.createElement("div");
     wrapper.className = "ncs-select-wrapper";
@@ -57,7 +53,7 @@
         opt.setAttribute("role", "option");
         opt.dataset.index = idx;
         opt.innerHTML =
-          '<span>' + item.label + '</span>' +
+          '<span>' + '<i class="' + item.icon + '">' + '</i>  ' + item.label + '</span>' +
           '<svg class="ncs-option-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
             '<path d="M20 6L9 17l-5-5"/>' +
           '</svg>';
@@ -154,16 +150,6 @@
     return api;
   };
 
-  /* ---------- Multi-mount helper ----------
-     Accepts: a CSS selector string, a jQuery collection,
-     a NodeList, an array of elements, or a single element.
-     Mounts one independent NCS instance per element and
-     returns an array of instances (same order as matched).
-
-     Usage:
-       NCS.createSelectAll('.icon-select', { items: countries, ... });
-       NCS.createSelectAll($('.icon-select'), { items: countries, ... });
-  */
   NCS.createSelectAll = function (target, options) {
     var els;
 
@@ -182,10 +168,7 @@
 
     var instances = [];
     els.forEach(function (el) {
-      // Guard: skip null/undefined entries or elements no longer in the DOM
-      // (can happen with Alpine x-if/x-for timing, or stale references)
       if (!el || !(el instanceof HTMLElement) || !el.isConnected) return;
-      // Avoid double-mounting if called twice on the same element
       if (el.dataset.ncsMounted === "1") return;
       el.dataset.ncsMounted = "1";
       instances.push(NCS.createSelect(el, options));
@@ -193,4 +176,3 @@
 
     return instances;
   };
-})();
