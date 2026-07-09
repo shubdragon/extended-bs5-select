@@ -30,7 +30,10 @@ window.NCS = window.NCS || {};
             '<div class="ncs-options" role="listbox"></div>' +
             '</div>';
 
+        try{
         mountEl.appendChild(wrapper);
+        }catch(e){
+        }
 
         var controlEl = wrapper.querySelector(".ncs-control");
         var valueEl = wrapper.querySelector(".ncs-control-value");
