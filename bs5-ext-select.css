@@ -1,191 +1,194 @@
-.ncs-select-wrapper, .ncs-select-wrapper * {
-    box-sizing: border-box;
-  }
+.ncs-select-wrapper,
+    .ncs-select-wrapper * {
+        box-sizing: border-box;
+    }
 
-  .ncs-select-wrapper {
-    --ncs-border: #d7dbe0;
-    --ncs-border-focus: #6d5efc;
-    --ncs-bg: #ffffff;
-    --ncs-text: #1f2430;
-    --ncs-muted: #8892a0;
-    --ncs-hover: #f3f1ff;
-    --ncs-active: #6d5efc;
-    --ncs-active-text: #ffffff;
-    --ncs-radius: 10px;
-    --ncs-shadow: 0 10px 30px rgba(31, 36, 48, 0.12);
+    .ncs-select-wrapper {
+        --ncs-border: #d7dbe0;
+        --ncs-border-focus: #6d5efc;
+        --ncs-bg: #ffffff;
+        --ncs-text: #1f2430;
+        --ncs-muted: #8892a0;
+        --ncs-hover: #f3f1ff;
+        --ncs-active: #6d5efc;
+        --ncs-active-text: #ffffff;
+        --ncs-radius: 10px;
+        --ncs-shadow: 0 10px 30px rgba(31, 36, 48, 0.12);
 
-    position: relative;
-    width: 100%;
-    max-width: 360px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.4;
-    color: var(--ncs-text);
-  }
+        position: relative;
+        width: 100%;
+        max-width: 360px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 1.4;
+        color: var(--ncs-text);
+    }
 
-  .ncs-control {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    width: 100%;
-    min-height: 42px;
-    padding: 8px 12px;
-    background: var(--ncs-bg);
-    border: 1.5px solid var(--ncs-border);
-    border-radius: var(--ncs-radius);
-    cursor: pointer;
-    user-select: none;
-    transition: border-color .15s ease, box-shadow .15s ease;
-  }
+    .ncs-control {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        width: 100%;
+        min-height: 42px;
+        padding: 8px 12px;
+        background: var(--ncs-bg);
+        border: 1.5px solid var(--ncs-border);
+        border-radius: var(--ncs-radius);
+        cursor: pointer;
+        user-select: none;
+        transition: border-color .15s ease, box-shadow .15s ease;
+    }
 
-  .ncs-control:hover {
-    border-color: #b9bfca;
-  }
+    .ncs-control:hover {
+        border-color: #b9bfca;
+    }
 
-  .ncs-select-wrapper.ncs-open .ncs-control {
-    border-color: var(--ncs-border-focus);
-    box-shadow: 0 0 0 3px rgba(109, 94, 252, 0.15);
-  }
+    .ncs-select-wrapper.ncs-open .ncs-control {
+        border-color: var(--ncs-border-focus);
+        box-shadow: 0 0 0 3px rgba(109, 94, 252, 0.15);
+    }
 
-  .ncs-control-value {
-    flex: 1 1 auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+    .ncs-control-value {
+        flex: 1 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
-  .ncs-control-value.ncs-placeholder {
-    color: var(--ncs-muted);
-  }
+    .ncs-control-value.ncs-placeholder {
+        color: var(--ncs-muted);
+    }
 
-  .ncs-caret {
-    flex: none;
-    width: 18px;
-    height: 18px;
-    color: var(--ncs-muted);
-    transition: transform .15s ease;
-  }
+    .ncs-caret {
+        flex: none;
+        width: 18px;
+        height: 18px;
+        color: var(--ncs-muted);
+        transition: transform .15s ease;
+    }
 
-  .ncs-select-wrapper.ncs-open .ncs-caret {
-    transform: rotate(180deg);
-  }
+    .ncs-select-wrapper.ncs-open .ncs-caret {
+        transform: rotate(180deg);
+    }
 
-  .ncs-panel {
-    position: absolute;
-    z-index: 2147483000; /* stay above bootstrap/tailwind layered components */
-    top: calc(100% + 6px);
-    left: 0;
-    right: 0;
-    background: var(--ncs-bg);
-    border: 1px solid var(--ncs-border);
-    border-radius: var(--ncs-radius);
-    box-shadow: var(--ncs-shadow);
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(-6px);
-    pointer-events: none;
-    transition: opacity .12s ease, transform .12s ease;
-  }
+    .ncs-panel {
+        position: absolute;
+        z-index: 2147483000;
+        /* stay above bootstrap/tailwind layered components */
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        background: var(--ncs-bg);
+        border: 1px solid var(--ncs-border);
+        border-radius: var(--ncs-radius);
+        box-shadow: var(--ncs-shadow);
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-6px);
+        pointer-events: none;
+        transition: opacity .12s ease, transform .12s ease;
+    }
 
-  .ncs-select-wrapper.ncs-open .ncs-panel,
-  .ncs-panel.ncs-open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
+    .ncs-select-wrapper.ncs-open .ncs-panel,
+    .ncs-panel.ncs-open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
 
-  .ncs-search-box {
-    position: relative;
-    padding: 8px;
-    border-bottom: 1px solid var(--ncs-border);
-  }
+    .ncs-search-box {
+        position: relative;
+        padding: 8px;
+        border-bottom: 1px solid var(--ncs-border);
+    }
 
-  .ncs-search-box svg {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 15px;
-    height: 15px;
-    color: var(--ncs-muted);
-    pointer-events: none;
-  }
+    .ncs-search-box svg {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 15px;
+        height: 15px;
+        color: var(--ncs-muted);
+        pointer-events: none;
+    }
 
-  .ncs-search-input {
-    width: 100%;
-    padding: 8px 10px 8px 32px;
-    border: 1px solid var(--ncs-border);
-    border-radius: 8px;
-    outline: none;
-    font-size: 14px;
-    color: var(--ncs-text);
-    background: #fafbfc;
-  }
+    .ncs-search-input {
+        width: 100%;
+        padding: 8px 10px 8px 32px;
+        border: 1px solid var(--ncs-border);
+        border-radius: 8px;
+        outline: none;
+        font-size: 14px;
+        color: var(--ncs-text);
+        background: #fafbfc;
+    }
 
-  .ncs-search-input:focus {
-    border-color: var(--ncs-border-focus);
-    background: #fff;
-  }
+    .ncs-search-input:focus {
+        border-color: var(--ncs-border-focus);
+        background: #fff;
+    }
 
-  .ncs-options {
-    max-height: 220px;
-    overflow-y: auto;
-    padding: 6px;
-  }
+    .ncs-options {
+        max-height: 220px;
+        overflow-y: auto;
+        padding: 6px;
+    }
 
-  .ncs-options::-webkit-scrollbar {
-    width: 8px;
-  }
-  .ncs-options::-webkit-scrollbar-thumb {
-    background: #d7dbe0;
-    border-radius: 8px;
-  }
+    .ncs-options::-webkit-scrollbar {
+        width: 8px;
+    }
 
-  .ncs-option {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 9px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-  }
+    .ncs-options::-webkit-scrollbar-thumb {
+        background: #d7dbe0;
+        border-radius: 8px;
+    }
 
-  .ncs-option:hover,
-  .ncs-option.ncs-highlighted {
-    background: var(--ncs-hover);
-  }
+    .ncs-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 9px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
 
-  .ncs-option.ncs-selected {
-    background: var(--ncs-active);
-    color: var(--ncs-active-text);
-  }
+    .ncs-option:hover,
+    .ncs-option.ncs-highlighted {
+        background: var(--ncs-hover);
+    }
 
-  .ncs-option-check {
-    width: 16px;
-    height: 16px;
-    flex: none;
-    visibility: hidden;
-  }
+    .ncs-option.ncs-selected {
+        background: var(--ncs-active);
+        color: var(--ncs-active-text);
+    }
 
-  .ncs-option.ncs-selected .ncs-option-check {
-    visibility: visible;
-  }
+    .ncs-option-check {
+        width: 16px;
+        height: 16px;
+        flex: none;
+        visibility: hidden;
+    }
 
-  .ncs-empty {
-    padding: 16px 10px;
-    text-align: center;
-    color: var(--ncs-muted);
-  }
+    .ncs-option.ncs-selected .ncs-option-check {
+        visibility: visible;
+    }
 
-  .ncs-select-wrapper.ncs-disabled .ncs-control {
-    background: #f3f4f6;
-    color: var(--ncs-muted);
-    cursor: not-allowed;
-  }
+    .ncs-empty {
+        padding: 16px 10px;
+        text-align: center;
+        color: var(--ncs-muted);
+    }
 
-  /*
+    .ncs-select-wrapper.ncs-disabled .ncs-control {
+        background: #f3f4f6;
+        color: var(--ncs-muted);
+        cursor: not-allowed;
+    }
+
+    /*
     ========================================================
     BOOTSTRAP MODAL FIX (CSS-only)
     ========================================================
@@ -206,15 +209,15 @@
     for very tall option lists or modals with long scrollable
     bodies, since it has no browser-support caveat).
   */
-  .modal:has(.ncs-panel.ncs-open),
-  .modal-dialog:has(.ncs-panel.ncs-open),
-  .modal-content:has(.ncs-panel.ncs-open),
-  .modal-body:has(.ncs-panel.ncs-open) {
-    overflow: visible !important;
-  }
+    .modal:has(.ncs-panel.ncs-open),
+    .modal-dialog:has(.ncs-panel.ncs-open),
+    .modal-content:has(.ncs-panel.ncs-open),
+    .modal-body:has(.ncs-panel.ncs-open) {
+        overflow: visible !important;
+    }
 
-  /* Make sure the panel always wins the stacking fight against the
+    /* Make sure the panel always wins the stacking fight against the
      modal backdrop (Bootstrap 5 backdrop is z-index 1055, modal 1056). */
-  .modal .ncs-panel {
-    z-index: 2147483000;
-  }
+    .modal .ncs-panel {
+        z-index: 2147483000;
+    }
