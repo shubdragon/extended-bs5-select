@@ -1,8 +1,6 @@
 window.NCS = window.NCS || {};
 
-const el = document.querySelector(".ncs-select");
 
-if (el) {
     NCS.createSelect = function (mountEl, options) {
         var items = options.items || [];
         var placeholder = options.placeholder || "Select an option";
@@ -185,7 +183,7 @@ if (el) {
         var el = typeof target === "string" ? document.querySelector(target) : target;
         return (el && el._ncsInstance) || null;
     };
-}
+
 
 
     
